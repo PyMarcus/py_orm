@@ -1,6 +1,6 @@
 import sqlalchemy as sa
 from datetime import datetime
-from model_base import ModelBase
+from .model_base import ModelBase
 
 
 class TipoPicole(ModelBase):

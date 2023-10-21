@@ -27,7 +27,7 @@ def create_engine(sqlite: bool = False) -> Engine | None:
                                     echo=False,
                                     connect_args={"check_same_thread": False})
     else:
-        conn_str: str = "postgresql://postgres:postpw@localhost:5432/items"  # hardcoded settings xD
+        conn_str: str = "postgresql://postgres:postpw@localhost:5432/postgres"  # hardcoded settings xD
         __engine = sa.create_engine(url=conn_str, echo=False)
     return __engine
 
@@ -48,6 +48,8 @@ def create_tables() -> None:
 
     if not __engine:
         create_engine()
-    from models import ModelBase
+    import models.__all_models
+    print("Criando tabelas...")
     ModelBase.metadata.drop_all(__engine)
     ModelBase.metadata.create_all(__engine)
+    print(f"OK {__engine}")
